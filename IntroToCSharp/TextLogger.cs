@@ -16,16 +16,23 @@ namespace IntroToCSharp
             string path = "Log.txt";
             string time = DateTime.Now.ToString("HH:mm:ss");
 
-            using (FileStream file = File.OpenRead(path))
+            using (FileStream file = File.OpenWrite(path))
             {
-                byte[] info = new UTF8Encoding(true).GetBytes("SEVERITY " + severity.ToString() + ": " + message);
+                byte[] info = new UTF8Encoding(true).GetBytes("SEVERITY " + severity.ToString() + ": " + message + " " + time);
                 file.Write(info, 0, info.Length);
             }
         }
 
         public void Assert(bool condition, string message, int severity)
         {
-            Console.WriteLine("[" + condition + "] " + "SEVERITY " + severity.ToString() + ": " + message);
+            string path = "Log.txt";
+            string time = DateTime.Now.ToString("HH:mm:ss");
+
+            using (FileStream file = File.OpenWrite(path))
+            {
+                byte[] info = new UTF8Encoding(true).GetBytes("[" + condition + "] " + "SEVERITY " + severity.ToString() + ": " + message + " " + time);
+                file.Write(info, 0, info.Length);
+            }
         }
     }
 }

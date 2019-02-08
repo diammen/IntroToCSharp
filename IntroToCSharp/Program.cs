@@ -23,6 +23,10 @@ namespace IntroToCSharp
             ConsoleLogger logger = new ConsoleLogger();
             TextLogger txtLog = new TextLogger();
 
+            object obj = new Random().Next(2) == 0 ? new BaseClass() : new DerivedClass();
+
+            Console.WriteLine("Class chosen=" + obj.GetType());
+
             Console.WriteLine("Enter a name:");
             name = Console.ReadLine();
             Console.Clear();
@@ -77,6 +81,7 @@ namespace IntroToCSharp
                         default:
                             logger.Log("Expected command", 1);
                             txtLog.Log("Expected command", 1);
+                            txtLog.Assert(false, "Expected command", 1);
                             break;
                     }
                 }
